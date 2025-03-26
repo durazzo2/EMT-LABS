@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -27,11 +30,15 @@ public class Accomodation {
 
     private boolean isRented;
 
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
     public Accomodation(String name,AccommodationCategory category, Host host, Integer numRooms) {
         this.name = name;
         this.category = category;
         this.host = host;
         this.numRooms = numRooms;
         this.isRented = false;
+        this.reviews = new ArrayList<>();
     }
 }
