@@ -1,33 +1,12 @@
 package mk.ukim.finki.mk.emtlab1.service;
 
 import mk.ukim.finki.mk.emtlab1.model.Country;
-import mk.ukim.finki.mk.emtlab1.repository.CountryRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class CountryService {
-    private final CountryRepository countryRepository;
+public interface CountryService {
 
-    public CountryService(CountryRepository countryRepository) {
-        this.countryRepository = countryRepository;
-    }
 
-    public List<Country> findAll() {
-        return countryRepository.findAll();
-    }
 
-    public Optional<Country> findById(Long id) {
-        return countryRepository.findById(id);
-    }
-
-    public Country save(Country country) {
-        return countryRepository.save(country);
-    }
-
-    public void deleteById(Long id) {
-        countryRepository.deleteById(id);
-    }
+    List<Country> findAll();
 }

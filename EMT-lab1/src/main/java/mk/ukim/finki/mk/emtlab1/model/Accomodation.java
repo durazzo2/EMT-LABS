@@ -27,5 +27,11 @@ public class Accomodation {
 
     private boolean isRented;
 
-
+    public Accomodation(String name,AccommodationCategory category, Host host, Integer numRooms) {
+        this.name = name;
+        this.category = category;
+        this.host = host;
+        this.numRooms = numRooms;
+        this.isRented = false;
+    }
 }
