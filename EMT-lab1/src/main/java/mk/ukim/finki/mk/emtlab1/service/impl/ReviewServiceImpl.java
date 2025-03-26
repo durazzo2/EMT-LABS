@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
         Review review = new Review();
         review.setComment(reviewDto.getComment());
         review.setRating(reviewDto.getRating());
-      //  review.setAccommodation(accommodation);
+       review.setAccommodation(accommodation);
         return reviewRepository.save(review);
     }
 }
