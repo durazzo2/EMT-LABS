@@ -75,11 +75,11 @@ public class AccommodationController {
                 .orElseThrow(() -> new RuntimeException("Host not found"));
     }
 
-    // Method for programmatic use with a different name to avoid signature clash
     public Accommodation save(AccommodationDto accommodationDto) {
         Accommodation accommodation = convertToEntity(accommodationDto);
         return accommodationService.save(accommodation).orElse(null);
     }
+
     @GetMapping("/search")
     public List<Accommodation> searchAccommodations(
             @RequestParam(required = false) String name,
@@ -91,7 +91,6 @@ public class AccommodationController {
         if (hostId != null) {
             host = hostService.findById(hostId).orElse(null);
         }
-
         return accommodationService.searchAccommodations(name, category, host, numRooms);
     }
 }
