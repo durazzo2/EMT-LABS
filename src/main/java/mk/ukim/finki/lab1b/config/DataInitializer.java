@@ -8,6 +8,7 @@ import mk.ukim.finki.lab1b.repository.CountryRepository;
 import mk.ukim.finki.lab1b.repository.HostRepository;
 import mk.ukim.finki.lab1b.web.AccommodationController;
 import org.springframework.stereotype.Component;
+import mk.ukim.finki.lab1b.dto.AccommodationDto;
 
 @Component
 public class DataInitializer {
@@ -25,11 +26,11 @@ public class DataInitializer {
         Country c1=countryRepository.save(new Country("Macedonia","Europe"));
         Country c2= countryRepository.save(new Country("Japan","Asia"));
 
-        Host h1= hostRepository.save(new Host("Dimitar","Iliev",c1));
-        Host h2=hostRepository.save(new Host("Mila","Ilieva",c2));
+        Host h1= hostRepository.save(new Host("Teodor","Duracoski",c1));
+        Host h2=hostRepository.save(new Host("Mila","Gjorgoska",c2));
 
-        accommodationController.save(new AccommodationDto("Family", Category.APARTMENT,h1.getId(),4));
-        accommodationController.save(new AccommodationDto("Solo", Category.FLAT,h2.getId(),1));
+        accommodationController.save(new AccommodationDto("Family", Category.APARTMENT,h1,4));
+        accommodationController.save(new AccommodationDto("Solo", Category.FLAT,h2,1));
 
     }
 
