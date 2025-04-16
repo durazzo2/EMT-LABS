@@ -1,5 +1,7 @@
 package mk.ukim.finki.lab1b.web;
 
+import mk.ukim.finki.lab1b.dto.CreateHostDto;
+import mk.ukim.finki.lab1b.dto.HostDto;
 import mk.ukim.finki.lab1b.model.domain.Host;
 import mk.ukim.finki.lab1b.service.domain.HostService;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +29,13 @@ public class HostController {
                 .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping("/add")
-    public ResponseEntity<Host> save(@RequestBody HostDto host){
+    public ResponseEntity<Host> save(@RequestBody Host host){
         return hostService.save(host)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Host> update(@PathVariable Long id, @RequestBody HostDto host) {
+    public ResponseEntity<Host> update(@PathVariable Long id, @RequestBody Host host) {
         return hostService.update(id, host)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
