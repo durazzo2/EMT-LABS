@@ -1,6 +1,8 @@
 package mk.ukim.finki.lab1b.service.domain.impl;
 
 import mk.ukim.finki.lab1b.model.domain.Accommodation;
+import mk.ukim.finki.lab1b.model.domain.Host;
+import mk.ukim.finki.lab1b.model.enumerations.Category;
 import mk.ukim.finki.lab1b.repository.AccommodationRepository;
 import mk.ukim.finki.lab1b.service.domain.AccommodationService;
 import mk.ukim.finki.lab1b.service.domain.HostService;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AccommodationServiceImpl implements AccommodationService {
@@ -81,5 +84,16 @@ public class AccommodationServiceImpl implements AccommodationService {
                 existingAccommodation.setNumRooms(existingAccommodation.getNumRooms()-1);
             return accommodationRepository.save(existingAccommodation);
         });
+    }
+
+
+    @Override
+    public List<Accommodation> searchAccommodations(String name, Category category, Host host, Integer numRooms) {
+        return accommodationRepository.findAll().stream()
+                .filter(acc -> name == null || acc.getName().contains(name))
+                .filter(acc -> category == null || acc.getCategory() == category)
+                .filter(acc -> host == null || acc.getHost().equals(host))
+                .filter(acc -> numRooms == null || acc.getNumRooms().equals(numRooms))
+                .collect(Collectors.toList());
     }
 }

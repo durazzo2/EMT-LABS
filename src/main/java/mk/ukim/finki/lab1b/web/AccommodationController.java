@@ -2,6 +2,8 @@ package mk.ukim.finki.lab1b.web;
 
 import mk.ukim.finki.lab1b.dto.AccommodationDto;
 import mk.ukim.finki.lab1b.model.domain.Accommodation;
+import mk.ukim.finki.lab1b.model.domain.Host;
+import mk.ukim.finki.lab1b.model.enumerations.Category;
 import mk.ukim.finki.lab1b.service.domain.AccommodationService;
 import mk.ukim.finki.lab1b.service.domain.HostService;
 import org.springframework.http.ResponseEntity;
@@ -77,5 +79,19 @@ public class AccommodationController {
     public Accommodation save(AccommodationDto accommodationDto) {
         Accommodation accommodation = convertToEntity(accommodationDto);
         return accommodationService.save(accommodation).orElse(null);
+    }
+    @GetMapping("/search")
+    public List<Accommodation> searchAccommodations(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Category category,
+            @RequestParam(required = false) Long hostId,
+            @RequestParam(required = false) Integer numRooms) {
+
+        Host host = null;
+        if (hostId != null) {
+            host = hostService.findById(hostId).orElse(null);
+        }
+
+        return accommodationService.searchAccommodations(name, category, host, numRooms);
     }
 }
